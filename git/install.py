@@ -8,7 +8,7 @@ homedir = os.path.expanduser("~")
 ####################### For git #######################
 
 # git completion
-result, output = cmd.getstatusoutput('cp ./git_completion/git_completion.bash ~/.git-completion.sh')
+result, output = cmd.getstatusoutput('cp ./git_completion.bash ~/.git-completion.sh')
 if result != 0:
     print "Error! %s" % output
 else:
