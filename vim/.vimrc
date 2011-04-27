@@ -173,17 +173,7 @@ map <C-E> :NERDTreeToggle
 map <C-T> :TlistToggle
 
 au BufEnter /usr/include/c++/*   setf cpp " all the file under the directory are recognized as cpp files by vim
-
 au BufRead,BufNewFile  *.tex :set filetype=tex                      " the original type is plaintex
-au BufRead,BufNewFile  *vimrc*,*.vim map <F3>    ^i"<ESC>           " insert remark flag ,for vim script
-au BufRead,BufNewFile  *vimrc*,*.vim map <F4>    :s?"??:nohl    " delete remark flag ,for vim script
-
-au filetype c,cpp,cc,h,v map <F3>    ^i//<ESC>                      " insert remark flag ,for c/c++/verilog
-au filetype c,cpp,cc,h,v map <F4>    :s?\/\/??:nohl             " delete remark flag ,for c/c++/verilog
-au filetype python,sh    map <F3>    ^i#<ESC>                       " insert remark flag ,for python
-au filetype python,sh    map <F4>    :s?#??:nohl                " delete remark flag ,for python
-au filetype tex          map <F3>    ^i%<ESC>                       " insert remark flag ,for Latex
-au filetype tex          map <F4>    :s?%??:nohl                " delete remark flag ,for Latex
 
 " vim -b : edit binary using xxd-format!
 augroup Binary
@@ -232,9 +222,3 @@ endif
 iab #in #include
 iab #de #define
 iab zhushi /*<BS> * input:       list and number* function:    get the Nth node in the list*/
-iab zhedie /* vim:set foldmethod=marker foldmarker={,}: */
-"iab xasp <%@language=jscript%><CR><%<CR><TAB><CR><BS>%><ESC><<O<TAB>
-"iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
-"iab { {
-"iab ( (
-"iab [ [
