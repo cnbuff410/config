@@ -88,7 +88,7 @@ set expandtab " no real tabs please!
 set wrap " wrap lines  
 set smarttab " use tabs at the start of a line, spaces elsewhere
 set dictionary=/usr/share/dict/american-english "use dictionary when input the english word
-set textwidth=79
+set textwidth=78
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Folding
@@ -190,12 +190,20 @@ augroup Binary
 augroup END
 
 autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType python setlocal textwidth=80
 autocmd FileType javascrīpt set omnifunc=javascrīptcomplete#CompleteJS
+autocmd FileType javascript setlocal textwidth=80
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType html setlocal textwidth=80
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType css setlocal textwidth=80
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType xml setlocal textwidth=80
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType php setlocal textwidth=80
 autocmd FileType c set omnifunc=ccomplete#Complete
+autocmd FileType c setlocal textwidth=80
+autocmd FileType java setlocal textwidth=100
 
 :au bufnewfile *.sh call setline(1,'#!/usr/bin/bash') 
 :au bufnewfile *.py call setline(1,'#!/usr/bin/env python') 
