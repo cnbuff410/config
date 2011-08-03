@@ -16,8 +16,10 @@ set completeopt=longest,menu " for omnipotent
 " Theme/Colors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set background=dark " we are using a dark background
-syntax on " syntax highlighting on
-if has("gui_running")
+
+if &t_Co > 2 || has("gui_running")
+    syntax on
+    set hlsearch
     set guifont=Bitstream\ Vera\ Sans\ Mono\ 18
     colorscheme desert
 else
@@ -56,7 +58,6 @@ set nu
 " Visual Cues
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set showmatch " show matching brackets
-set hlsearch " do highlight searched for phrases
 set incsearch " BUT do highlight as you type you search phrase
 set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:$ " what to show when I hit :set list
 set so=15 " Keep 10 lines (top/bottom) for scope
@@ -161,7 +162,8 @@ let b:match_ignorecase = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <right> <ESC><C-PageDown>   " right arrow (normal mode) switches tabs
 map <left>  <ESC><C-PageUp>     " left arrow (normal mode) switches tabs
-map <silent> <F2> :TlistToggle  " F2 to toggle the taglist  
+map <silent> <F2> :TlistToggle
+  " F2 to toggle the taglist  
 "map <up> <ESC>:Sex<RETURN><ESC><C-W><C-W> " up arrow (normal mode) brings up a file list
 "map <down> <ESC>:Tlist<RETURN> " down arrow  (normal mode) brings up the tag list
 "map <F12> ggVGg? " encypt the file (toggle)
