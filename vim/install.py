@@ -194,5 +194,25 @@ if result != 0:
     exit()
 print "OK!"
 
+# EasyMotion
+print "Download and install the EasyMotion......",
+result, output = cmd.getstatusoutput("wget -N http://www.vim.org/scripts/download_script.php?src_id=15369 -O EasyMotion.zip")
+if result != 0:
+    print "Error! %s" % output
+    exit()
+elif "OK" not in output:
+    print output
+    exit()
+
+result, output = cmd.getstatusoutput("unzip ./EasyMotion.zip -d %s/.vim/ " % homedir)
+if result != 0:
+    print "Error! %s" % output
+    exit()
+
+result, output = cmd.getstatusoutput("rm ./EasyMotion.zip")
+if result != 0:
+    print "Error! %s" % output
+    exit()
+print "OK!"
 
 print """\nTo finish installing the help file run: \n :helptags ~/.vim/doc \n\nChange to the $HOME/.vim/doc or $HOME/vimfiles/doc or $VIM/vimfiles/doc directory, start Vim and run the ":helptags ." command to process the help file."""
