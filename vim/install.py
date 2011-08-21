@@ -5,6 +5,10 @@ import os.path
 import os
 
 homedir = os.path.expanduser("~")
+vimdir = homedir + "/.vim"
+if not os.path.exists(vimdir):
+    print "vim directory doesn't exist"
+    exit(1)
 
 ####################### For vim #######################
 
@@ -16,18 +20,18 @@ else:
     print "Copy vimrc script......OK!"
 
 # Prepare all directories
-if os.path.exists("%s/.vim/ftplugin" % homedir) == False:
-    os.makedirs("%s/.vim/ftplugin" % homedir)
-if os.path.exists("%s/.vim/plugin" % homedir) == False:
-    os.makedirs("%s/.vim/plugin" % homedir)
-if os.path.exists("%s/.vim/indent" % homedir) == False:
-    os.makedirs("%s/.vim/indent" % homedir)
-if os.path.exists("%s/.vim/syntax" % homedir) == False:
-    os.makedirs("%s/.vim/syntax" % homedir)
-if os.path.exists("%s/.vim/autoload" % homedir) == False:
-    os.makedirs("%s/.vim/autoload" % homedir)
-if os.path.exists("%s/.vim/doc" % homedir) == False:
-    os.makedirs("%s/.vim/doc" % homedir)
+if os.path.exists("%s/ftplugin" % vimdir) == False:
+    os.makedirs("%s/ftplugin" % vimdir)
+if os.path.exists("%s/plugin" % vimdir) == False:
+    os.makedirs("%s/plugin" % vimdir)
+if os.path.exists("%s/indent" % vimdir) == False:
+    os.makedirs("%s/indent" % vimdir)
+if os.path.exists("%s/syntax" % vimdir) == False:
+    os.makedirs("%s/syntax" % vimdir)
+if os.path.exists("%s/autoload" % vimdir) == False:
+    os.makedirs("%s/autoload" % vimdir)
+if os.path.exists("%s/doc" % vimdir) == False:
+    os.makedirs("%s/doc" % vimdir)
 
 # Taglist
 print "Download and install the Taglist......",
@@ -39,7 +43,7 @@ elif "OK" not in output:
     print output
     exit()
 
-result, output = cmd.getstatusoutput("unzip ./taglist_45.zip -d %s/.vim/" % homedir)
+result, output = cmd.getstatusoutput("unzip ./taglist_45.zip -d %s/" % vimdir)
 if result != 0:
     print "Error! %s" % output
     exit()
@@ -60,7 +64,7 @@ elif "OK" not in output:
     print output
     exit()
 
-result, output = cmd.getstatusoutput("mv ./a.vim ~/.vim/plugin/")
+result, output = cmd.getstatusoutput("mv ./a.vim %s/plugin/" % vimdir)
 if result != 0:
     print "Error! %s" % output
     exit()
@@ -77,7 +81,24 @@ elif "OK" not in output:
     print output
     exit()
 
-result, output = cmd.getstatusoutput("mv ./tex.vim ~/.vim/indent/")
+result, output = cmd.getstatusoutput("mv ./tex.vim %s/indent/" % vimdir)
+if result != 0:
+    print "Error! %s" % output
+    exit()
+
+print "OK!"
+
+# AutoClose
+print "Download and install the AutoClose....",
+result, output = cmd.getstatusoutput("wget -N http://www.vim.org/scripts/download_script.php?src_id=9223 -O autoclose.vim")
+if result != 0:
+    print "Error! %s" % output
+    exit()
+elif "OK" not in output:
+    print output
+    exit()
+
+result, output = cmd.getstatusoutput("mv ./autoclose.vim %s/plugin/" % vimdir)
 if result != 0:
     print "Error! %s" % output
     exit()
@@ -94,7 +115,7 @@ elif "OK" not in output:
     print output
     exit()
 
-result, output = cmd.getstatusoutput("mv ./SearchComplete.vim ~/.vim/plugin/")
+result, output = cmd.getstatusoutput("mv ./SearchComplete.vim %s/plugin/" % vimdir)
 if result != 0:
     print "Error! %s" % output
     exit()
@@ -111,41 +132,7 @@ elif "OK" not in output:
     print output
     exit()
 
-result, output = cmd.getstatusoutput("mv ./python.vim ~/.vim/syntax/")
-if result != 0:
-    print "Error! %s" % output
-    exit()
-
-print "OK!"
-
-# python function
-print "Download and install the python_fn",
-result, output = cmd.getstatusoutput("wget -N http://www.vim.org/scripts/download_script.php?src_id=9196 -O python_fn.vim")
-if result != 0:
-    print "Error! %s" % output
-    exit()
-elif "OK" not in output:
-    print output
-    exit()
-
-result, output = cmd.getstatusoutput("mv ./python_fn.vim ~/.vim/ftplugin/")
-if result != 0:
-    print "Error! %s" % output
-    exit()
-
-print "OK!"
-
-# repeat
-print "Download and install the repeat",
-result, output = cmd.getstatusoutput("wget -N http://www.vim.org/scripts/download_script.php?src_id=8206 -O repeat.vim")
-if result != 0:
-    print "Error! %s" % output
-    exit()
-elif "OK" not in output:
-    print output
-    exit()
-
-result, output = cmd.getstatusoutput("mv ./repeat.vim ~/.vim/autoload/")
+result, output = cmd.getstatusoutput("mv ./python.vim %s/syntax/" % vimdir)
 if result != 0:
     print "Error! %s" % output
     exit()
@@ -162,7 +149,7 @@ elif "OK" not in output:
     print output
     exit()
 
-result, output = cmd.getstatusoutput("unzip ./nerdcommenter.zip -d %s/.vim/" % homedir)
+result, output = cmd.getstatusoutput("unzip ./nerdcommenter.zip -d %s/" % vimdir)
 if result != 0:
     print "Error! %s" % output
     exit()
@@ -183,7 +170,7 @@ elif "OK" not in output:
     print output
     exit()
 
-result, output = cmd.getstatusoutput("unzip ./NERD_tree.zip -d %s/.vim/ " % homedir)
+result, output = cmd.getstatusoutput("unzip ./NERD_tree.zip -d %s/ " % vimdir)
 if result != 0:
     print "Error! %s" % output
     exit()
@@ -204,7 +191,7 @@ elif "OK" not in output:
     print output
     exit()
 
-result, output = cmd.getstatusoutput("unzip ./EasyMotion.zip -d %s/.vim/ " % homedir)
+result, output = cmd.getstatusoutput("unzip ./EasyMotion.zip -d %s/ " % vimdir)
 if result != 0:
     print "Error! %s" % output
     exit()
