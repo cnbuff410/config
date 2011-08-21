@@ -158,12 +158,17 @@ let g:tex_flavor='latex'
 let b:match_ignorecase = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" EasyMotion
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:EasyMotion_leader_key = '\m'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <right> <ESC><C-PageDown>   " right arrow (normal mode) switches tabs
-map <left>  <ESC><C-PageUp>     " left arrow (normal mode) switches tabs
-map <silent> <F2> :TlistToggle
-  " F2 to toggle the taglist  
+map <silent> <C-E> :NERDTreeToggle
+map <silent> <C-T> :TlistToggle
+map <silent> <right> <ESC><C-PageDown>   " right arrow (normal mode) switches tabs
+map <silent> <left>  <ESC><C-PageUp>     " left arrow (normal mode) switches tabs
 "map <up> <ESC>:Sex<RETURN><ESC><C-W><C-W> " up arrow (normal mode) brings up a file list
 "map <down> <ESC>:Tlist<RETURN> " down arrow  (normal mode) brings up the tag list
 "map <F12> ggVGg? " encypt the file (toggle)
@@ -171,8 +176,6 @@ map <silent> <F2> :TlistToggle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <C-E> :NERDTreeToggle
-map <C-T> :TlistToggle
 
 au BufEnter /usr/include/c++/*   setf cpp " all the file under the directory are recognized as cpp files by vim
 au BufRead,BufNewFile  *.tex :set filetype=tex                      " the original type is plaintex
