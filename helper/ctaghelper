@@ -1,0 +1,30 @@
+#!/usr/bin/python
+# Copyright 2011 Google Inc. All Rights Reserved.
+
+class bcolors:
+  HEADER = '\033[95m'
+  OKBLUE = '\033[94m'
+  OKGREEN = '\033[92m'
+  WARNING = '\033[93m'
+  FAIL = '\033[91m'
+  ENDC = '\033[0m'
+
+  def disable(self):
+    self.HEADER = ''
+    self.OKBLUE = ''
+    self.OKGREEN = ''
+    self.WARNING = ''
+    self.FAIL = ''
+    self.ENDC = ''
+
+num = 100
+
+print "\n" + "*" * num
+
+print bcolors.FAIL + "for C" + bcolors.ENDC + ": ctags -R ."
+
+print bcolors.FAIL + "for C++" + bcolors.ENDC + ": ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --language-force=c++ ."
+
+print bcolors.WARNING + "refer to http://www.vimer.cn/2009/10/%E5%9C%A8vim%E4%B8%AD%E4%BD%BF%E7%94%A8ctags.html" + bcolors.ENDC
+
+print "*" * num + "\n"

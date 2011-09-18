@@ -8,9 +8,10 @@ set ffs=unix,dos,mac " support all three, in this order
 filetype plugin indent on " load filetype plugins
 set viminfo+=! " make sure it can save viminfo
 set isk+=_,$,@,%,#,-,. " none of these should be word dividers, so make them not be
-set helplang=cn " chinese help
 set completeopt=longest,menu " for omnipotent
 "setlocal spell spelllang=en_us " for spelling check
+let mapleader = "\\" " leader key
+let g:mapleader = "\\"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Theme/Colors
@@ -42,7 +43,7 @@ set cmdheight=1 " the command bar is 1 high
 set nonumber " turn off line numbers
 set numberwidth=4 " minimum width to use for the number column,not a fix size
 set hid " you can change buffer without saving
-set backspace=2 " make backspace work normal
+set backspace=indent,eol,start " make backspace "more powerful"
 set whichwrap+=<,>,h,l  " backspace and cursor keys wrap to
 set mouse=a " use mouse everywhere
 set shortmess=atI " shortens messages to avoid 'press a key' prompt
@@ -52,7 +53,6 @@ set lz " do not redraw while running macros (much faster) (LazyRedraw)
 set fillchars=vert:\ ,stl:\ ,stlnc:\
 set linebreak
 set nu
-"set lsp=0 " space it out a little more (easier to read)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual Cues
@@ -66,6 +66,18 @@ set noerrorbells " no noises for error
 set vb t_vb=     " no noises for other
 set laststatus=2 " always show the status line
 set ignorecase smartcase
+
+" show trailing spaces in yellow (or red, for users with dark backgrounds).
+" "set nolist" to disable this.
+" this only works if syntax highlighting is enabled.
+set list
+set listchars=tab:\ \ ,trail:\ ,extends:»,precedes:«
+if &background == "dark"
+highlight SpecialKey ctermbg=Red guibg=Red
+else
+highlight SpecialKey ctermbg=Yellow guibg=Yellow
+end
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " File encode
@@ -85,7 +97,7 @@ set tabstop=8 " tab spacing (settings below are just to unify it)
 set softtabstop=4 " unify
 set shiftwidth=4 " unify
 set expandtab " no real tabs please!
-set wrap " wrap lines  
+set wrap " wrap lines
 set smarttab " use tabs at the start of a line, spaces elsewhere
 set dictionary=/usr/share/dict/american-english "use dictionary when input the english word
 set textwidth=78
@@ -131,7 +143,7 @@ let Tlist_Auto_Update = 1 " auto update list whenever did the modification
 
 set tags=./tags,../tags,./../../tags,./**/tags,/home/windstorm/.tags/tags  " which tags files CTRL-] will search
 "set autochdir " auto change the current dierctory when you open the file or window or any other buffer
-set makeef=makeerror.err 
+set makeef=makeerror.err
 set path=./../**
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -158,11 +170,6 @@ let g:tex_flavor='latex'
 let b:match_ignorecase = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" EasyMotion
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:EasyMotion_leader_key = '\w'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <silent> <C-E> :NERDTreeToggle
@@ -179,6 +186,10 @@ map <silent> <left>  <ESC><C-PageUp>     " left arrow (normal mode) switches tab
 
 au BufEnter /usr/include/c++/*   setf cpp " all the file under the directory are recognized as cpp files by vim
 au BufRead,BufNewFile  *.tex :set filetype=tex                      " the original type is plaintex
+au BufRead,BufNewFile *.java 2match Underlined /.\%101v/
+au BufRead,BufNewFile *.c,*.cpp,*.py 2match Underlined /.\%81v/
+au BufWritePost *.c,*.h,*.py silent! !ctags -R &
+au BufWritePost *.cpp silent! !ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --language-force=c++ &
 
 " vim -b : edit binary using xxd-format!
 augroup Binary
@@ -208,8 +219,8 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 autocmd FileType c setlocal textwidth=80
 autocmd FileType java setlocal textwidth=100
 
-:au bufnewfile *.sh call setline(1,'#!/usr/bin/bash') 
-:au bufnewfile *.py call setline(1,'#!/usr/bin/env python') 
+:au bufnewfile *.sh call setline(1,'#!/usr/bin/bash')
+:au bufnewfile *.py call setline(1,'#!/usr/bin/env python')
 
 " Remember the location when left last time
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif

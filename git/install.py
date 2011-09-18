@@ -65,7 +65,8 @@ content = \
     ci = commit -a
     co = checkout
     logs = log --stat
-    log1 = log --pretty=oneline --abbrev-commit
+    log1 = log --pretty=oneline --graph --decorate --abbrev-commit
+    diff = diff --word-diff
 """
 wfile.write(content)
 wfile.close()
