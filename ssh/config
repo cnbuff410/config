@@ -1,0 +1,6 @@
+# Multiple links share same tunnel
+ControlMaster auto
+ControlPath /tmp/ssh_mux_%h_%p_%r
+
+# Persistent connection
+ControlPersist 10h
