@@ -186,8 +186,8 @@ map <silent> <left>  <ESC><C-PageUp>     " left arrow (normal mode) switches tab
 
 au BufEnter /usr/include/c++/*   setf cpp " all the file under the directory are recognized as cpp files by vim
 au BufRead,BufNewFile  *.tex :set filetype=tex                      " the original type is plaintex
-au BufRead,BufNewFile *.java 2match Underlined /.\%101v/
-au BufRead,BufNewFile *.c,*.cpp,*.py 2match Underlined /.\%81v/
+au BufRead,BufNewFile *.java :set colorcolumn=101
+au BufRead,BufNewFile *.c,*.cpp,*.py :set colorcolumn=81
 au BufWritePost *.c,*.h,*.py silent! !ctags -R &
 au BufWritePost *.cpp silent! !ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --language-force=c++ &
 
@@ -219,8 +219,10 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 autocmd FileType c setlocal textwidth=80
 autocmd FileType java setlocal textwidth=100
 
-:au bufnewfile *.sh call setline(1,'#!/usr/bin/bash')
-:au bufnewfile *.py call setline(1,'#!/usr/bin/env python')
+au BufNewFile *.sh call setline(1,'#!/usr/bin/bash')
+au BufNewFile *.py call setline(1,'#!/usr/bin/env python')
+
+au BufRead,BufNewFile *.go set filetype=go
 
 " Remember the location when left last time
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
