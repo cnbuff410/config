@@ -33,6 +33,7 @@ content = \
 """[user]
     name = windstorm
     email = likunarmstrong@gmail.com
+
 [color]
     diff = auto
     status = auto
@@ -40,6 +41,7 @@ content = \
     interactive = auto
     ui = true
     pager = true
+
 [color "branch"]
     current = yellow reverse
     local = yellow
@@ -59,6 +61,7 @@ content = \
 [core]
     pager = less -FRSX
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    autocrlf = input
 
 [alias]
     st = status
@@ -68,6 +71,7 @@ content = \
     log1 = log --pretty=oneline --graph --decorate --abbrev-commit
     diff = diff --word-diff
 """
+
 wfile.write(content)
 wfile.close()
 print "Generate git global config to ~/.gitconfig......OK!"
