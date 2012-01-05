@@ -248,3 +248,4 @@ endif
 iab #in #include
 iab #de #define
 iab zhushi /*<BS> * input:       list and number* function:    get the Nth node in the list*/
+cabbrev w!! w !sudo tee %
