@@ -68,7 +68,8 @@ content = \
     ci = commit -a
     co = checkout
     logs = log --stat
-    log1 = log --pretty=oneline --graph --decorate --abbrev-commit
+    log1 = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    fuckit = reset --hard
     diff = diff --word-diff
 """
 
