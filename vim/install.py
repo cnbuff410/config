@@ -35,7 +35,7 @@ if os.path.exists("%s/doc" % vimdir) == False:
 
 # Taglist
 print "Download and install the Taglist......",
-result, output = cmd.getstatusoutput("wget -N http://downloads.sourceforge.net/project/vim-taglist/vim-taglist/4.5/taglist_45.zip?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fvim-taglist%2Ffiles%2Fvim-taglist%2F4.5%2F")
+result, output = cmd.getstatusoutput("wget -N http://www.vim.org/scripts/download_script.php?src_id=7701 -O taglist_45.zip")
 if result != 0:
     print "Error! %s" % output
     exit()
