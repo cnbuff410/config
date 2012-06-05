@@ -8,21 +8,18 @@ set ffs=unix,dos,mac " support all three, in this order
 filetype plugin indent on " load filetype plugins
 set viminfo+=! " make sure it can save viminfo
 set isk+=_,$,@,%,#,-,. " none of these should be word dividers, so make them not be
+set helplang=cn " chinese help
 set completeopt=longest,menu " for omnipotent
 "setlocal spell spelllang=en_us " for spelling check
-let mapleader = "\\" " leader key
-let g:mapleader = "\\"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Theme/Colors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set background=dark " we are using a dark background
-
-if &t_Co > 2 || has("gui_running")
-    syntax on
-    set hlsearch
+syntax on " syntax highlighting on
+if has("gui_running")
     set guifont=Bitstream\ Vera\ Sans\ Mono\ 18
-    colorscheme desert
+    colorscheme wombat
 else
     colorscheme desert
 endif
@@ -43,7 +40,7 @@ set cmdheight=1 " the command bar is 1 high
 set nonumber " turn off line numbers
 set numberwidth=4 " minimum width to use for the number column,not a fix size
 set hid " you can change buffer without saving
-set backspace=indent,eol,start " make backspace "more powerful"
+set backspace=2 " make backspace work normal
 set whichwrap+=<,>,h,l  " backspace and cursor keys wrap to
 set mouse=a " use mouse everywhere
 set shortmess=atI " shortens messages to avoid 'press a key' prompt
@@ -53,11 +50,13 @@ set lz " do not redraw while running macros (much faster) (LazyRedraw)
 set fillchars=vert:\ ,stl:\ ,stlnc:\
 set linebreak
 set nu
+"set lsp=0 " space it out a little more (easier to read)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual Cues
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set showmatch " show matching brackets
+set hlsearch " do highlight searched for phrases
 set incsearch " BUT do highlight as you type you search phrase
 set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:$ " what to show when I hit :set list
 set so=15 " Keep 10 lines (top/bottom) for scope
@@ -67,23 +66,10 @@ set vb t_vb=     " no noises for other
 set laststatus=2 " always show the status line
 set ignorecase smartcase
 
-" show trailing spaces in yellow (or red, for users with dark backgrounds).
-" "set nolist" to disable this.
-" this only works if syntax highlighting is enabled.
-set list
-set listchars=tab:\ \ ,trail:\ ,extends:»,precedes:«
-if &background == "dark"
-highlight SpecialKey ctermbg=Red guibg=Red
-else
-highlight SpecialKey ctermbg=Yellow guibg=Yellow
-end
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " File encode
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=utf-8
-"set fileencoding=chinese
 set fileencodings=ucs-bom,utf-8,chinese
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -97,10 +83,10 @@ set tabstop=8 " tab spacing (settings below are just to unify it)
 set softtabstop=4 " unify
 set shiftwidth=4 " unify
 set expandtab " no real tabs please!
-set wrap " wrap lines
+set wrap " wrap lines  
 set smarttab " use tabs at the start of a line, spaces elsewhere
 set dictionary=/usr/share/dict/american-english "use dictionary when input the english word
-set textwidth=78
+set textwidth=79
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Folding
@@ -141,10 +127,11 @@ let Tlist_Enable_Fold_Column = 0 " Do not show folding tree
 let Tlist_Show_One_File = 1 " only display the tag of current file
 let Tlist_Auto_Update = 1 " auto update list whenever did the modification
 
-set tags=./tags,../tags,./../../tags,./**/tags,/home/windstorm/.tags/tags  " which tags files CTRL-] will search
+set tags=./tags,../tags,./../../tags,./**/tags  " which tags files CTRL-] will search
 "set autochdir " auto change the current dierctory when you open the file or window or any other buffer
-set makeef=makeerror.err
-set path=./../**
+set makeef=makeerror.err 
+"set path=./../**
+set path=./
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Latex
@@ -172,10 +159,9 @@ let b:match_ignorecase = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <silent> <C-E> :NERDTreeToggle
-map <silent> <C-T> :TlistToggle
-map <silent> <right> <ESC><C-PageDown>   " right arrow (normal mode) switches tabs
-map <silent> <left>  <ESC><C-PageUp>     " left arrow (normal mode) switches tabs
+map <right> <ESC><C-PageDown>   " right arrow (normal mode) switches tabs
+map <left>  <ESC><C-PageUp>     " left arrow (normal mode) switches tabs
+map <silent> <F2> :TlistToggle  " F2 to toggle the taglist  
 "map <up> <ESC>:Sex<RETURN><ESC><C-W><C-W> " up arrow (normal mode) brings up a file list
 "map <down> <ESC>:Tlist<RETURN> " down arrow  (normal mode) brings up the tag list
 "map <F12> ggVGg? " encypt the file (toggle)
@@ -183,13 +169,15 @@ map <silent> <left>  <ESC><C-PageUp>     " left arrow (normal mode) switches tab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <C-E> :NERDTreeToggle
+map <C-T> :TlistToggle
 
 au BufEnter /usr/include/c++/*   setf cpp " all the file under the directory are recognized as cpp files by vim
-au BufRead,BufNewFile  *.tex :set filetype=tex                      " the original type is plaintex
+
+au BufRead,BufNewFile  *vimrc*,*.vim map <F3>    ^i"<ESC>           " insert remark flag ,for vim script
+au BufRead,BufNewFile  *vimrc*,*.vim map <F4>    :s?"??:nohl    " delete remark flag ,for vim script
 au BufRead,BufNewFile *.java :set colorcolumn=101
 au BufRead,BufNewFile *.c,*.cpp,*.py :set colorcolumn=81
-au BufWritePost *.c,*.h,*.py silent! !ctags -R &
-au BufWritePost *.cpp silent! !ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --language-force=c++ &
 
 " vim -b : edit binary using xxd-format!
 augroup Binary
@@ -204,25 +192,27 @@ augroup Binary
 augroup END
 
 autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType python setlocal textwidth=80
 autocmd FileType javascrīpt set omnifunc=javascrīptcomplete#CompleteJS
-autocmd FileType javascript setlocal textwidth=80
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType html setlocal textwidth=80
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType css setlocal textwidth=80
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType xml setlocal textwidth=80
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType php setlocal textwidth=80
 autocmd FileType c set omnifunc=ccomplete#Complete
-autocmd FileType c setlocal textwidth=80
-autocmd FileType java setlocal textwidth=100
 
-au BufNewFile *.sh call setline(1,'#!/usr/bin/bash')
-au BufNewFile *.py call setline(1,'#!/usr/bin/env python')
+function! SetGoFile()
+    call setline(1,'// Author: likunarmstrong@gmail.com')
+    call setline(2,'')
+    call setline(3,'// Put your project description here')
+endfunc
 
+:au bufnewfile *.sh call setline(1,'#!/usr/bin/bash') 
+:au bufnewfile *.py call setline(1,'#!/usr/bin/env python') 
+:au bufnewfile *.go call SetGoFile() 
+
+" Syntax for go
 au BufRead,BufNewFile *.go set filetype=go
+au BufRead,BufNewFile *.go set shiftwidth=8
+set rtp+=/Users/windstorm/Work/hg/go/misc/vim/
 
 " Remember the location when left last time
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
@@ -248,4 +238,10 @@ endif
 iab #in #include
 iab #de #define
 iab zhushi /*<BS> * input:       list and number* function:    get the Nth node in the list*/
+iab zhedie /* vim:set foldmethod=marker foldmarker={,}: */
+"iab xasp <%@language=jscript%><CR><%<CR><TAB><CR><BS>%><ESC><<O<TAB>
+"iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
+"iab { {
+"iab ( (
+"iab [ [
 cabbrev w!! w !sudo tee %
