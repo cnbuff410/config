@@ -200,9 +200,11 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 
 function! SetGoFile()
-    call setline(1,'// Author: likunarmstrong@gmail.com')
-    call setline(2,'')
-    call setline(3,'// Put your project description here')
+    call setline(1,'/*')
+    call setline(2,' * Put your project description here')
+    call setline(3,' * ')
+    call setline(4,' * Author: likunarmstrong@gmail.com')
+    call setline(5,' */')
 endfunc
 
 :au bufnewfile *.sh call setline(1,'#!/usr/bin/bash') 
