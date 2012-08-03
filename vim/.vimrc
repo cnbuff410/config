@@ -210,6 +210,7 @@ endfunc
 :au bufnewfile *.sh call setline(1,'#!/usr/bin/bash') 
 :au bufnewfile *.py call setline(1,'#!/usr/bin/env python') 
 :au bufnewfile *.go call SetGoFile() 
+:au BufWritePre *.go :silent Fmt
 
 " Syntax for go
 au BufRead,BufNewFile *.go set filetype=go
