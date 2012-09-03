@@ -1,23 +1,11 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 
 import commands as cmd
 import os.path
 
-homedir = os.path.expanduser("~")
-
 ####################### For git #######################
 
-# git completion
-result, output = cmd.getstatusoutput('cp ./git_completion.bash ~/.git-completion.sh')
-if result != 0:
-    print "Error! %s" % output
-else:
-    print "Copy git_completion script......OK!"
-
-wfile = open("%s/.bashrc" % homedir, "a")
-wfile.write("source ~/.git-completion.sh")
-wfile.close()
-print "Add source to bash script......OK!"
+homedir = os.path.expanduser("~")
 
 print 
 print "#"*50
