@@ -169,8 +169,35 @@ map <silent> <F2> :TlistToggle  " F2 to toggle the taglist
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 map <C-E> :NERDTreeToggle
 map <C-T> :TlistToggle
+
+" For go
+function! s:ReadGoTemplate(name)
+    let tmpls = [
+                \              [ '\V_test.go',       '~/.vim/template/go/test.go' ],
+                \              [ '\V.go',            '~/.vim/template/go/main.go' ],
+                \      ]
+    for [pat, tmpl] in tmpls
+        if a:name =~ pat
+            silent! exe printf('0r %s', tmpl)
+            break
+        endif
+    endfor
+endfunc
+
+:au BufRead,BufNewFile *.go set filetype=go
+:au BufRead,BufNewFile *.go set shiftwidth=8
+:au BufRead,BufNewFile *.go :inoremap . .<C-X><C-O>
+:au BufWritePre *.go :silent Fmt
+:au BufNewFile *.go call <SID>ReadGoTemplate(expand('%'))
+set rtp+=/Users/windstorm/Work/hg/go/misc/vim/
+
+" General
+
+au bufnewfile *.sh call setline(1,'#!/usr/bin/bash') 
+au bufnewfile *.py call setline(1,'#!/usr/bin/env python') 
 
 au BufEnter /usr/include/c++/*   setf cpp " all the file under the directory are recognized as cpp files by vim
 
@@ -199,24 +226,6 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 
-function! SetGoFile()
-    call setline(1,'/*')
-    call setline(2,' * Put your project description here')
-    call setline(3,' * ')
-    call setline(4,' * Author: likunarmstrong@gmail.com')
-    call setline(5,' */')
-endfunc
-
-:au bufnewfile *.sh call setline(1,'#!/usr/bin/bash') 
-:au bufnewfile *.py call setline(1,'#!/usr/bin/env python') 
-
-" Syntax for go
-:au BufRead,BufNewFile *.go set filetype=go
-:au BufRead,BufNewFile *.go set shiftwidth=8
-:au BufRead,BufNewFile *.go :inoremap . .<C-X><C-O>
-:au bufnewfile *.go call SetGoFile() 
-:au BufWritePre *.go :silent Fmt
-set rtp+=/Users/windstorm/Work/hg/go/misc/vim/
 
 " Remember the location when left last time
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
