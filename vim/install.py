@@ -13,7 +13,7 @@ if not os.path.exists(vimdir):
 ####################### For vim #######################
 
 # vimrc
-result, output = cmd.getstatusoutput('cp ./.vimrc ~/.vimrc')
+result, output = cmd.getstatusoutput('cp ./vimrc ~/.vimrc')
 if result != 0:
     print "Error! %s" % output
 else:
