@@ -2,9 +2,10 @@
 " General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible " get out of horrible vi-compatible mode
-filetype on " detect the type of file
 set history=100 " How many lines of history to remember
 set ffs=unix,dos,mac " support all three, in this order
+set rtp+=$GOROOT/misc/vim
+filetype on " detect the type of file
 filetype plugin indent on " load filetype plugins
 set viminfo+=! " make sure it can save viminfo
 set isk+=_,$,@,%,#,-,. " none of these should be word dividers, so make them not be
@@ -192,7 +193,6 @@ endfunc
 :au BufRead,BufNewFile *.go :inoremap . .<C-X><C-O>
 :au BufWritePre *.go :silent Fmt
 :au BufNewFile *.go call <SID>ReadGoTemplate(expand('%'))
-set rtp+=/Users/windstorm/Work/hg/go/misc/vim/
 
 " General
 
