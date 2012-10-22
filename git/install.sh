@@ -7,7 +7,7 @@ then
 else
     echo "$(tput setaf 1)Copy gitconfig...Failed! $(tput sgr0)"
 fi
-cp `pwd`/git/git-completion.bash $HOME/.git-completion.bash
+cp `pwd`/git/git-completion.bash $HOME/.git-completion.sh
 if [ $? -eq 0 ]
 then
     echo "$(tput setaf 2)Copy git-completion...OK!$(tput sgr0)"
