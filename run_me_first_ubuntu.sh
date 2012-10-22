@@ -3,6 +3,10 @@
 # Build
 sudo apt-get install build-essential
 
+# Python tools
+sudo apt-get install python-pip python-dev python-setuptools
+sudo easy_install pylint
+
 # Latex
 sudo apt-get install texlive
 
