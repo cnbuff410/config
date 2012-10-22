@@ -1,13 +1,13 @@
 export RSVN_ROOT=/Users/windstorm/Work/svn/
-source ~/.git_completion.sh
+source ~/.git-completion.sh
 
-alias ls='ls -GF --color'
+alias ls='ls -GF --color=auto'
 alias ll='ls -alh'
 alias la='ls -A'
 alias l='ls -CF'
 alias grep='grep --color=auto'
 
 export HISTCONTROL=ignoreboth
-export GOPATH=/Users/windstorm/Work/golang/
+export GOPATH=$HOME/Work/golang/
 export PS1="\u@\h:\W #\! \A \`if [ \$? == 0 ]; then echo \:\); else echo \:\(; fi\` "
 shopt -s histappend
