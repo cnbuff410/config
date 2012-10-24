@@ -25,5 +25,5 @@ then
     mkdir -p $HOME/.vim/syntax
 fi
 wget -O $HOME/.vim/syntax/python.vim http://www.vim.org/scripts/download_script.php?src_id=17429
-echo "$(tput setaf 2)Done$(tput sgr0)"
+echo "$(tput setaf 2)Done. Use "BundleInstall" in Vim to install all the plug-ins$(tput sgr0)"
 echo

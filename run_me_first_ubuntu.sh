@@ -15,8 +15,6 @@ sudo apt-get install vim vim-scripts vim-doc vim-latexsuite vim-gui-common vim-g
 
 # Git
 sudo apt-get install git
-cp ./git_completion.bash ~/.git_completion.bash
 
 # ctags
 sudo apt-get install exuberant-ctags
-

@@ -1,7 +1,4 @@
 echo "***************Bash*****************"
-echo "Please modify your PS1 to be: "
-echo "export PS1=\"\u@\h:\W #\! \A \`if [ \$? == 0 ]; then echo \:\); else echo \:\(; fi\` \""
-
 linux="Linux"
 mac="Darwin"
 if [ `uname -s` == $linux ]

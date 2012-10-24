@@ -5,6 +5,7 @@ set nocompatible " get out of horrible vi-compatible mode
 set history=100 " How many lines of history to remember
 set ffs=unix,dos,mac " support all three, in this order
 set rtp+=$GOROOT/misc/vim
+
 filetype off " Required by vundle
 set rtp+=~/.vim/vundle.git/
 call vundle#rc()
@@ -12,7 +13,6 @@ call vundle#rc()
 " Github
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-repeat'
-Bundle 'Townk/vim-autoclose'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'mjbrownie/pythoncomplete.vim'
