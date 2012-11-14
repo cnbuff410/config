@@ -22,6 +22,7 @@ Bundle 'a.vim'
 Bundle 'surround.vim'
 Bundle 'matchit.zip'
 Bundle 'SearchComplete'
+Bundle 'Pydiction'
 " Non github repos
 "Bundle 'git://git.wincent.com/command-t.git'
 
@@ -152,6 +153,11 @@ set tags=./tags,../tags,./../../tags,./**/tags  " which tags files CTRL-] will s
 set makeef=makeerror.err 
 "set path=./../**
 set path=./
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pydiction
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Latex

@@ -10,6 +10,8 @@ alias grep='grep --color=auto'
 export HISTCONTROL=ignoreboth
 export GOROOT=$HOME//Work/hg/go
 export GOPATH=$HOME/Work/golang/
+export GOROOT=$HOME/Work/hg/go/
+export PATH=$HOME/Work/sdks/android-sdk-macosx/platform-tools/:$HOME/Work/sdks/android-ndk-r8b/:$GOROOT/bin:$PATH
 export PS1="\u@\h:\W #\! \A \`if [ \$? == 0 ]; then echo \:\); else echo \:\(; fi\` "
 export PATH=$PATH:$HOME/Work/sdks/google_appengine/:$HOME/Work/sdks/android-sdk-linux/tools/:$HOME/Work/sdks/android-sdk-linux/platform-tools/:$GOROOT/bin:$GOPATH/bin
 shopt -s histappend
