@@ -1,20 +1,20 @@
 #!/bin/bash
 
 # Build
-sudo apt-get install build-essential
+sudo apt-get install -y build-essential
 
 # Python tools
-sudo apt-get install python-pip python-dev python-setuptools
+sudo apt-get install -y python-pip python-dev python-setuptools
 sudo easy_install pylint
 
 # Latex
-sudo apt-get install texlive
+sudo apt-get install -y texlive
 
 # Vim
-sudo apt-get install vim vim-scripts vim-doc vim-latexsuite vim-gui-common vim-gnome
+sudo apt-get install -y vim vim-scripts vim-doc vim-latexsuite vim-gui-common vim-gnome
 
 # Git
-sudo apt-get install git
+sudo apt-get install -y git
 
 # ctags
-sudo apt-get install exuberant-ctags
+sudo apt-get install -y exuberant-ctags
