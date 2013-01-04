@@ -71,6 +71,7 @@ set lz " do not redraw while running macros (much faster) (LazyRedraw)
 set fillchars=vert:\ ,stl:\ ,stlnc:\
 set linebreak
 set nu
+set clipboard=unnamed
 "set lsp=0 " space it out a little more (easier to read)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -86,6 +87,7 @@ set noerrorbells " no noises for error
 set vb t_vb=     " no noises for other
 set laststatus=2 " always show the status line
 set ignorecase smartcase
+set synmaxcol=120
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " File encode
