@@ -12,17 +12,15 @@ call vundle#rc()
 
 " Github
 Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-repeat'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
-Bundle 'mjbrownie/pythoncomplete.vim'
+Bundle 'Shougo/neocomplcache'
+Bundle 'tpope/vim-surround'
+Bundle 'rkulla/pydiction'
 " vim-scripts repos
 Bundle 'taglist.vim'
 Bundle 'a.vim'
-Bundle 'surround.vim'
 Bundle 'matchit.zip'
-Bundle 'SearchComplete'
-Bundle 'Pydiction'
 " Non github repos
 "Bundle 'git://git.wincent.com/command-t.git'
 
@@ -87,7 +85,20 @@ set noerrorbells " no noises for error
 set vb t_vb=     " no noises for other
 set laststatus=2 " always show the status line
 set ignorecase smartcase
-set synmaxcol=120
+
+" Toggle Menu and Toolbar
+if has("gui_running")
+    set guioptions-=m
+    set guioptions-=T
+    map <silent> <F1> :if &guioptions =~# 'T' <Bar>
+            \set guioptions-=T <Bar>
+            \set guioptions-=m <bar>
+        \else <Bar>
+            \set guioptions+=T <Bar>
+            \set guioptions+=m <Bar>
+        \endif<CR>
+endif
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " File encode
@@ -150,7 +161,7 @@ let Tlist_Enable_Fold_Column = 0 " Do not show folding tree
 let Tlist_Show_One_File = 1 " only display the tag of current file
 let Tlist_Auto_Update = 1 " auto update list whenever did the modification
 
-set tags=./tags,../tags,./../../tags,./**/tags  " which tags files CTRL-] will search
+set tags=./tags,../tags,./**/tags  " which tags files CTRL-] will search
 "set autochdir " auto change the current dierctory when you open the file or window or any other buffer
 set makeef=makeerror.err 
 "set path=./../**
@@ -160,6 +171,20 @@ set path=./
 " Pydiction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Neocomplcache
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Launches neocomplcache automatically on vim startup.
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Use camel case completion.
+let g:neocomplcache_enable_camel_case_completion = 1
+" Use underscore completion.
+let g:neocomplcache_enable_underbar_completion = 1
+" Sets minimum char length of syntax keyword.
+let g:neocomplcache_min_syntax_length = 3
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Latex
@@ -221,6 +246,16 @@ endfunc
 :au BufWritePre *.go :silent Fmt
 :au BufNewFile *.go call <SID>ReadGoTemplate(expand('%'))
 
+" For CSS & HTML
+" for CSS, also have things in braces indented:
+autocmd FileType css set smartindent
+" for HTML, generally format text, but if a long line has been created
+" leave it alone when editing:
+autocmd FileType html set formatoptions+=tl textwidth=150
+" for both CSS and HTML, use genuine tab characters for 
+" indentation, to make files a few bytes smaller:
+autocmd FileType html,css set noexpandtab tabstop=2
+
 " General
 
 au bufnewfile *.sh call setline(1,'#!/usr/bin/bash') 
@@ -257,31 +292,7 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 " Remember the location when left last time
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Toggle Menu and Toolbar
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has("gui_running")
-    set guioptions-=m
-    set guioptions-=T
-    map <silent> <F1> :if &guioptions =~# 'T' <Bar>
-            \set guioptions-=T <Bar>
-            \set guioptions-=m <bar>
-        \else <Bar>
-            \set guioptions+=T <Bar>
-            \set guioptions+=m <Bar>
-        \endif<CR>
-endif
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Useful abbrevs
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-iab #in #include
-iab #de #define
-iab zhushi /*<BS> * input:       list and number* function:    get the Nth node in the list*/
-iab zhedie /* vim:set foldmethod=marker foldmarker={,}: */
-"iab xasp <%@language=jscript%><CR><%<CR><TAB><CR><BS>%><ESC><<O<TAB>
-"iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
-"iab { {
-"iab ( (
-"iab [ [
 cabbrev w!! w !sudo tee %
