@@ -17,13 +17,3 @@ else
 fi
 
 echo "$(tput setaf 2)Done$(tput sgr0)"
-
-sudo cp ./tree /usr/local/bin/
-if [ $? -eq 0 ]
-then
-    echo "$(tput setaf 2)Copy tree script...OK!$(tput sgr0)"
-else
-    echo "$(tput setaf 1)Copy tree script...Failed!$(tput sgr0)"
-fi
-
-echo
