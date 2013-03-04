@@ -3,12 +3,10 @@ vimdir="$HOME/.vim"
 
 if [ ! -e $vimdir ] 
 then
-    echo "$(tput setaf 1)Vim directory doesn't exist.$(tput sgr0)"
-    return
+    mkdir -p $vimdir
 fi
 
 ln -sf `pwd`/vim/vimrc ~/.vimrc
-cp -r `pwd`/vim/template ~/.vim/
 
 # Install Vundle
 git clone http://github.com/gmarik/vundle.git ~/.vim/vundle.git
