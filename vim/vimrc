@@ -14,9 +14,11 @@ call vundle#rc()
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
-Bundle 'Shougo/neocomplcache'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-surround'
 Bundle 'rkulla/pydiction'
+Bundle 'bronson/vim-trailing-whitespace'
+Bundle 'xolox/vim-session'
 " vim-scripts repos
 Bundle 'taglist.vim'
 Bundle 'a.vim'
@@ -117,10 +119,11 @@ set tabstop=8 " tab spacing (settings below are just to unify it)
 set softtabstop=4 " unify
 set shiftwidth=4 " unify
 set expandtab " no real tabs please!
-set wrap " wrap lines  
+set wrap " wrap lines
 set smarttab " use tabs at the start of a line, spaces elsewhere
 set dictionary=/usr/share/dict/american-english "use dictionary when input the english word
 set textwidth=79
+set clipboard=unnamedplus " Yank to the X window clipboard
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Folding
@@ -163,28 +166,9 @@ let Tlist_Auto_Update = 1 " auto update list whenever did the modification
 
 set tags=./tags,../tags,./**/tags  " which tags files CTRL-] will search
 "set autochdir " auto change the current dierctory when you open the file or window or any other buffer
-set makeef=makeerror.err 
+set makeef=makeerror.err
 "set path=./../**
 set path=./
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Pydiction
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Neocomplcache
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Launches neocomplcache automatically on vim startup.
-let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Use camel case completion.
-let g:neocomplcache_enable_camel_case_completion = 1
-" Use underscore completion.
-let g:neocomplcache_enable_underbar_completion = 1
-" Sets minimum char length of syntax keyword.
-let g:neocomplcache_min_syntax_length = 3
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Latex
@@ -205,27 +189,16 @@ set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Matchit
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let b:match_ignorecase = 1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <right> <ESC><C-PageDown>   " right arrow (normal mode) switches tabs
 map <left>  <ESC><C-PageUp>     " left arrow (normal mode) switches tabs
-map <silent> <F2> :TlistToggle  " F2 to toggle the taglist  
-"map <up> <ESC>:Sex<RETURN><ESC><C-W><C-W> " up arrow (normal mode) brings up a file list
-"map <down> <ESC>:Tlist<RETURN> " down arrow  (normal mode) brings up the tag list
-"map <F12> ggVGg? " encypt the file (toggle)
+map <C-E> :NERDTreeToggle
+map <C-T> :TlistToggle
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-map <C-E> :NERDTreeToggle
-map <C-T> :TlistToggle
-
 " For go
 function! s:ReadGoTemplate(name)
     let tmpls = [
@@ -240,33 +213,25 @@ function! s:ReadGoTemplate(name)
     endfor
 endfunc
 
-:au BufRead,BufNewFile *.go set filetype=go
-:au BufRead,BufNewFile *.go set shiftwidth=8
-:au BufRead,BufNewFile *.go :inoremap . .<C-X><C-O>
-:au BufWritePre *.go :silent Fmt
-:au BufNewFile *.go call <SID>ReadGoTemplate(expand('%'))
+au BufRead,BufNewFile *.go set filetype=go
+au BufRead,BufNewFile *.go set shiftwidth=8
+au BufRead,BufNewFile *.go :inoremap . .<C-X><C-O>
+au BufWritePre *.go :silent Fmt
+au BufNewFile *.go call <SID>ReadGoTemplate(expand('%'))
 
-" For CSS & HTML
-" for CSS, also have things in braces indented:
-autocmd FileType css set smartindent
-" for HTML, generally format text, but if a long line has been created
-" leave it alone when editing:
-autocmd FileType html set formatoptions+=tl textwidth=150
-" for both CSS and HTML, use genuine tab characters for 
-" indentation, to make files a few bytes smaller:
-autocmd FileType html,css set noexpandtab tabstop=2
+au FocusLost * :set nu
+au CursorMoved * :set rnu
+au InsertEnter * :set nu
+au InsertLeave * :set rnu
 
 " General
-
-au bufnewfile *.sh call setline(1,'#!/usr/bin/bash') 
-au bufnewfile *.py call setline(1,'#!/usr/bin/env python') 
-
-au BufEnter /usr/include/c++/*   setf cpp " all the file under the directory are recognized as cpp files by vim
+au bufnewfile *.sh call setline(1,'#!/usr/bin/bash')
+au bufnewfile *.py call setline(1,'#!/usr/bin/env python')
 
 au BufRead,BufNewFile  *vimrc*,*.vim map <F3>    ^i"<ESC>           " insert remark flag ,for vim script
 au BufRead,BufNewFile  *vimrc*,*.vim map <F4>    :s?"??:nohl    " delete remark flag ,for vim script
 au BufRead,BufNewFile *.java :set colorcolumn=101
-au BufRead,BufNewFile *.c,*.cpp,*.py :set colorcolumn=81
+au BufRead,BufNewFile *.c,*.cc,*.py :set colorcolumn=81
 
 " vim -b : edit binary using xxd-format!
 augroup Binary
@@ -292,7 +257,13 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 " Remember the location when left last time
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Useful abbrevs
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-cabbrev w!! w !sudo tee %
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let b:match_ignorecase = 1  " Matchit
+let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict' " pydiction
+let g:ycm_confirm_extra_conf = 0 " YouCompleteMe
+let g:session_autosave = 'no' " vim-session
+let g:session_autoload = 'no' " vim-session
+let g:session_default_to_last = 1 " vim-session
+let g:session_command_aliases = 1 " vim-session
