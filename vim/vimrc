@@ -73,7 +73,6 @@ set lz " do not redraw while running macros (much faster) (LazyRedraw)
 set fillchars=vert:\ ,stl:\ ,stlnc:\
 set linebreak
 set nu
-set clipboard=unnamed
 "set lsp=0 " space it out a little more (easier to read)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -116,15 +115,15 @@ set fileencodings=ucs-bom,utf-8,chinese
 set formatoptions+=mM " for charactors fold and patch
 set ai " autoindent
 set si " smartindent
+set shiftwidth=4 " for indentation
 set cindent " do c-style indenting
-set tabstop=8 " tab spacing (settings below are just to unify it)
+set tabstop=4 " tab spacing (settings below are just to unify it)
 set softtabstop=4 " unify
-set shiftwidth=4 " unify
 set expandtab " no real tabs please!
 set wrap " wrap lines
-set smarttab " use tabs at the start of a line, spaces elsewhere
+"set smarttab " use tabs at the start of a line, spaces elsewhere
 set dictionary=/usr/share/dict/american-english "use dictionary when input the english word
-set textwidth=79
+set textwidth=79 " global
 set clipboard=unnamedplus " Yank to the X window clipboard
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -201,29 +200,14 @@ map <C-T> :TlistToggle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" For go
-function! s:ReadGoTemplate(name)
-    let tmpls = [
-                \              [ '\V_test.go',       '~/.vim/template/go/test.go' ],
-                \              [ '\V.go',            '~/.vim/template/go/main.go' ],
-                \      ]
-    for [pat, tmpl] in tmpls
-        if a:name =~ pat
-            silent! exe printf('0r %s', tmpl)
-            break
-        endif
-    endfor
-endfunc
-
-au BufRead,BufNewFile *.go set filetype=go
-au BufRead,BufNewFile *.go set shiftwidth=8
-au BufWritePre *.go :silent Fmt
-au BufNewFile *.go call <SID>ReadGoTemplate(expand('%'))
-
 au FocusLost * :set nu
 au CursorMoved * :set rnu
 au InsertEnter * :set nu
 au InsertLeave * :set rnu
+
+" For go
+au BufRead,BufNewFile *.go set filetype=go
+au BufWritePre *.go :silent Fmt
 
 " General
 au bufnewfile *.sh call setline(1,'#!/usr/bin/bash')
@@ -231,8 +215,11 @@ au bufnewfile *.py call setline(1,'#!/usr/bin/env python')
 
 au BufRead,BufNewFile  *vimrc*,*.vim map <F3>    ^i"<ESC>           " insert remark flag ,for vim script
 au BufRead,BufNewFile  *vimrc*,*.vim map <F4>    :s?"??:nohl    " delete remark flag ,for vim script
+
 au BufRead,BufNewFile *.java :set colorcolumn=101
 au BufRead,BufNewFile *.c,*.cc,*.py :set colorcolumn=81
+
+au BufRead,BufNewFile *.html,*.java :set textwidth=100
 
 " vim -b : edit binary using xxd-format!
 augroup Binary
