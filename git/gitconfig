@@ -1,6 +1,7 @@
 [user]
-    name = windstorm
+    name = Kun
     email = likunarmstrong@gmail.com
+
 [color]
     diff = auto
     status = auto
@@ -8,6 +9,7 @@
     interactive = auto
 	ui = true
     pager = true
+
 [color "branch"]
     current = yellow reverse
     local = yellow
@@ -24,10 +26,14 @@
     changed = green
     untracked = cyan
 
+[branch]
+    autosetuprebase = always
+
 [core]
     pager = less -FRSX
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
     autocrlf = false
+	editor = /usr/bin/vim
 
 [alias]
     st = status
