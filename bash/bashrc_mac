@@ -1,16 +1,19 @@
-export RSVN_ROOT=/Users/windstorm/Work/svn/
+export RSVN_ROOT=/Users/cnbuff410/Work/svn/
 source ~/.git-completion.sh
+source ~/.adb.sh
 
 alias ls='ls -GF'
 alias ll='ls -alh'
 alias la='ls -A'
 alias l='ls -CF'
 alias grep='grep --color=auto'
+alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
 
 export HISTCONTROL=ignoreboth
 export GOPATH=$HOME/Work/golang/
-export GITAWAREPROMPT=$HOME/Work/git/tools/git/git-aware-prompt
+export GOROOT=$HOME/Work/sw/go/
+export GITAWAREPROMPT=$HOME/Work/personal/config/git/git-aware-prompt
 source $GITAWAREPROMPT/main.sh
 export PS1="\u@\h:\W\[$txtcyn\]\$git_branch\[$txtylw\]\$git_dirty\[$txtrst\] #\! \A \`if [ \$? == 0 ]; then echo \:\); else echo \:\(; fi\` "
-export PATH=$PATH:$HOME/Work/sdks/google_appengine/:$HOME/Work/sdks/android-sdk-linux/tools/:$HOME/Work/sdks/android-sdk-linux/platform-tools/:$GOROOT/bin:$GOPATH/bin
+export PATH=$PATH:$HOME/Work/sdks/appengine-sdk/go_appengine/:$HOME/Work/sdks/appengine-sdk/python/:$HOME/Work/sdks/adt-bundle-mac-x86_64-20130219/sdk/platform-tools/:$GOROOT/bin:$GOPATH/bin:/usr/local/gcutil/:/usr/local/gradle-1.8/bin/:/Users/cnbuff410/Work/sw/gsutil/
 shopt -s histappend
