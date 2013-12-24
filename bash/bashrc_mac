@@ -1,3 +1,5 @@
+set -o vi
+
 export RSVN_ROOT=/Users/cnbuff410/Work/svn/
 source ~/.git-completion.sh
 source ~/.adb.sh

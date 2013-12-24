@@ -1,3 +1,5 @@
+set -o vi
+
 export RSVN_ROOT=/Users/windstorm/Work/svn/
 source ~/.git-completion.sh
 
