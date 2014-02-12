@@ -1,6 +1,3 @@
-set -o vi
-
-export RSVN_ROOT=/Users/cnbuff410/Work/svn/
 source ~/.git-completion.sh
 source ~/.adb.sh
 
@@ -14,8 +11,9 @@ alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
 export HISTCONTROL=ignoreboth
 export GOPATH=$HOME/Work/golang/
 export GOROOT=$HOME/Work/sw/go/
+#:$HOME/Work/sw/google-cloud-sdk/platform/google_appengine/goroot/
 export GITAWAREPROMPT=$HOME/Work/personal/config/git/git-aware-prompt
 source $GITAWAREPROMPT/main.sh
 export PS1="\u@\h:\W\[$txtcyn\]\$git_branch\[$txtylw\]\$git_dirty\[$txtrst\] #\! \A \`if [ \$? == 0 ]; then echo \:\); else echo \:\(; fi\` "
-export PATH=$PATH:$HOME/Work/sdks/appengine-sdk/go_appengine/:$HOME/Work/sdks/appengine-sdk/python/:$HOME/Work/sdks/adt-bundle-mac-x86_64-20130219/sdk/platform-tools/:$GOROOT/bin:$GOPATH/bin:/usr/local/gcutil/:/usr/local/gradle-1.8/bin/:/Users/cnbuff410/Work/sw/gsutil/
+export PATH=$PATH:$HOME/Work/sdks/adt-bundle-mac-x86_64-20130219/sdk/platform-tools/:$GOROOT/bin:$GOPATH/bin:/usr/local/gradle-1.8/bin/:$HOME/Work/sw/google-cloud-sdk/bin:$HOME/Work/sw/google-cloud-sdk/platform/google_appengine/:/Users/cnbuff410/Work/sw/dart/dart-sdk/bin/
 shopt -s histappend
