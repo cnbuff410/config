@@ -12,6 +12,7 @@ call vundle#rc()
 
 " Github
 Bundle 'scrooloose/syntastic'
+Bundle 'roktas/syntastic-more'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'Valloric/YouCompleteMe'
@@ -255,3 +256,4 @@ let g:session_autoload = 'no' " vim-session
 let g:session_default_to_last = 1 " vim-session
 let g:session_command_aliases = 1 " vim-session
 let g:gofmt_command ="goimports"
+let g:go_appengine_path='/Users/cnbuff410/Work/sw/google-cloud-sdk/platform/google_appengine/'
