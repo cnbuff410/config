@@ -5,6 +5,7 @@ set nocompatible " get out of horrible vi-compatible mode
 set history=100 " How many lines of history to remember
 set ffs=unix,dos,mac " support all three, in this order
 set rtp+=$GOROOT/misc/vim
+set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
 
 filetype off " Required by vundle
 set rtp+=~/.vim/vundle.git/
@@ -209,7 +210,8 @@ au InsertEnter * :set nu
 au InsertLeave * :set rnu
 
 " For files
-au BufWritePre *.go :silent Fmt
+au BufWritePre,FileWritePost *.go :silent Fmt
+au BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
 au BufRead,BufNewFile *.go :set filetype=go
 au Filetype go,html setlocal tw=200
 au Filetype c,cpp,python setlocal colorcolumn=81
