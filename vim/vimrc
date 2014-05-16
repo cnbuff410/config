@@ -7,28 +7,29 @@ set ffs=unix,dos,mac " support all three, in this order
 set rtp+=$GOROOT/misc/vim
 set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
 
-filetype off " Required by vundle
-set rtp+=~/.vim/vundle.git/
-call vundle#rc()
-
+" Vundle config
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
 " Github
-Bundle 'scrooloose/syntastic'
-Bundle 'roktas/syntastic-more'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'tpope/vim-surround'
-Bundle 'bronson/vim-trailing-whitespace'
-Bundle "dgryski/vim-godef"
-Bundle 'othree/html5.vim'
-" vim-scripts repos
-Bundle 'taglist.vim'
-Bundle 'a.vim'
-Bundle 'matchit.zip'
-" Non github repos
-"Bundle 'git://git.wincent.com/command-t.git'
-
+Plugin 'scrooloose/syntastic'
+Plugin 'roktas/syntastic-more'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'tpope/vim-surround'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'othree/html5.vim'
+Plugin 'fatih/vim-go'
+Plugin 'majutsushi/tagbar'
+" Vim-scripts repos
+Plugin 'a.vim'
+Plugin 'matchit.zip'
+call vundle#end()
 filetype plugin indent on " load filetype plugins
+
 set viminfo+=! " make sure it can save viminfo
 set isk+=_,$,@,%,#,-,. " none of these should be word dividers, so make them not be
 set helplang=cn " chinese help
@@ -199,7 +200,7 @@ let g:tex_flavor='latex'
 map <right> <ESC><C-PageDown>   " right arrow (normal mode) switches tabs
 map <left>  <ESC><C-PageUp>     " left arrow (normal mode) switches tabs
 map <C-E> :NERDTreeToggle
-map <C-T> :TlistToggle
+map <C-T> :TagbarToggle
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
@@ -209,19 +210,22 @@ au CursorMoved * :set rnu
 au InsertEnter * :set nu
 au InsertLeave * :set rnu
 
-" For files
-au BufWritePre,FileWritePost *.go :silent Fmt
-au BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
+" For Go
 au BufRead,BufNewFile *.go :set filetype=go
+au BufWritePre,FileWritePost *.go :silent execute 'Fmt'
+au BufWritePost,FileWritePost *.go execute 'GoLint' | cwindow
+au VimEnter *.go nested :call tagbar#autoopen(1)
+au FileType go nmap gd <Plug>(go-def-split)
+au FileType go nmap gv <Plug>(go-doc-vertical)
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
 au Filetype go,html setlocal tw=200
-au Filetype c,cpp,python setlocal colorcolumn=81
 
 " General
+au Filetype c,cpp,python setlocal colorcolumn=81
 au bufnewfile *.sh call setline(1,'#!/usr/bin/bash')
 au bufnewfile *.py call setline(1,'#!/usr/bin/env python')
-
-au BufRead,BufNewFile  *vimrc*,*.vim map <F3>    ^i"<ESC>           " insert remark flag ,for vim script
-au BufRead,BufNewFile  *vimrc*,*.vim map <F4>    :s?"??:nohl    " delete remark flag ,for vim script
 
 " vim -b : edit binary using xxd-format!
 augroup Binary
@@ -242,6 +246,7 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
+autocmd FileType go set omnifunc=gocomplete#Complete
 
 
 " Remember the location when left last time
@@ -259,3 +264,4 @@ let g:session_default_to_last = 1 " vim-session
 let g:session_command_aliases = 1 " vim-session
 let g:gofmt_command ="goimports"
 let g:go_appengine_path='/Users/cnbuff410/Work/sw/google-cloud-sdk/platform/google_appengine/'
+let g:tagbar_left=1
