@@ -17,3 +17,5 @@ source $GITAWAREPROMPT/main.sh
 export PS1="\u@\h:\W\[$txtcyn\]\$git_branch\[$txtylw\]\$git_dirty\[$txtrst\] #\! \A \`if [ \$? == 0 ]; then echo \:\); else echo \:\(; fi\` "
 export PATH=$PATH:$HOME/Work/sdks/adt-bundle-mac-x86_64-20130219/sdk/platform-tools/:$GOROOT/bin:$GOPATH/bin:/usr/local/gradle-1.8/bin/:$HOME/Work/sw/google-cloud-sdk/bin:$HOME/Work/sw/google-cloud-sdk/platform/google_appengine/:/Users/cnbuff410/Work/sw/dart/dart-sdk/bin/
 shopt -s histappend
+
+if test “${PS1+set}”; then CDPATH=.:$GOPATH; fi

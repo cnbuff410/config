@@ -14,3 +14,5 @@ source $GITAWAREPROMPT/main.sh
 export PS1="\u@\h:\W\[$txtcyn\]\$git_branch\[$txtylw\]\$git_dirty\[$txtrst\] #\! \A \`if [ \$? == 0 ]; then echo \:\); else echo \:\(; fi\` "
 export PATH=$PATH:$HOME/Work/sdks/google_appengine/:$HOME/Work/sdks/android-sdk-linux/tools/:$HOME/Work/sdks/android-sdk-linux/platform-tools/:$GOROOT/bin:$GOPATH/bin
 shopt -s histappend
+
+if test “${PS1+set}”; then CDPATH=.:$GOPATH; fi
