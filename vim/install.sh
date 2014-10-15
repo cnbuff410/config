@@ -9,7 +9,7 @@ fi
 ln -sf `pwd`/vim/vimrc ~/.vimrc
 
 # Install Vundle
-git clone http://github.com/gmarik/vundle.git ~/.vim/vundle.git
+git clone http://github.com/gmarik/Vundle.git ~/.vim/bundle/Vundle.git
 
 # Install plugins not suitable for Vundle
 if [ ! -d $HOME/.vim/indent ]
