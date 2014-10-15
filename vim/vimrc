@@ -24,6 +24,8 @@ Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'othree/html5.vim'
 Plugin 'fatih/vim-go'
 Plugin 'majutsushi/tagbar'
+Plugin 'avakhov/vim-yaml'
+Plugin 'marijnh/tern_for_vim'
 " Vim-scripts repos
 Plugin 'a.vim'
 Plugin 'matchit.zip'
@@ -262,6 +264,6 @@ let g:session_autosave = 'no' " vim-session
 let g:session_autoload = 'no' " vim-session
 let g:session_default_to_last = 1 " vim-session
 let g:session_command_aliases = 1 " vim-session
-let g:gofmt_command ="goimports"
+let g:go_fmt_command = "goimports"
 let g:go_appengine_path='/Users/cnbuff410/Work/sw/google-cloud-sdk/platform/google_appengine/'
 let g:tagbar_left=1
