@@ -9,7 +9,7 @@ alias grep='grep --color=auto'
 
 export HISTCONTROL=ignoreboth
 export GOPATH=$HOME/Work/golang/
-export GITAWAREPROMPT=$HOME/Work/git/tools/git/git-aware-prompt
+export GITAWAREPROMPT=$HOME/Work/misc/config/git/git-aware-prompt
 source $GITAWAREPROMPT/main.sh
 export PS1="\u@\h:\W\[$txtcyn\]\$git_branch\[$txtylw\]\$git_dirty\[$txtrst\] #\! \A \`if [ \$? == 0 ]; then echo \:\); else echo \:\(; fi\` "
 export PATH=$PATH:$HOME/Work/sdks/google_appengine/:$HOME/Work/sdks/android-sdk-linux/tools/:$HOME/Work/sdks/android-sdk-linux/platform-tools/:$GOROOT/bin:$GOPATH/bin
