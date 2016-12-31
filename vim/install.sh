@@ -8,6 +8,9 @@ fi
 
 ln -sf `pwd`/vim/vimrc ~/.vimrc
 
+# Install ctags for tagbar plugin
+brew install ctags-exuberant
+
 # Install Vundle
 git clone http://github.com/gmarik/Vundle.git ~/.vim/bundle/Vundle.git
 
