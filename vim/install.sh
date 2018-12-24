@@ -12,7 +12,7 @@ ln -sf `pwd`/vim/vimrc ~/.vimrc
 brew install ctags-exuberant
 
 # Install Vundle
-git clone http://github.com/gmarik/Vundle.git ~/.vim/bundle/Vundle.git
+git clone http://github.com/gmarik/Vundle.git ~/.vim/bundle/Vundle.vim
 
 # Install plugins not suitable for Vundle
 if [ ! -d $HOME/.vim/indent ]
