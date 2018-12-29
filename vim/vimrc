@@ -29,6 +29,8 @@ Plugin 'marijnh/tern_for_vim'
 " Vim-scripts repos
 Plugin 'a.vim'
 Plugin 'matchit.zip'
+" Colorscheme
+Plugin 'kristijanhusak/vim-hybrid-material'
 call vundle#end()
 filetype plugin indent on " load filetype plugins
 
@@ -42,13 +44,8 @@ set completeopt=longest,menu " for omnipotent
 " Theme/Colors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set background=dark " we are using a dark background
+colorscheme hybrid_material
 syntax on " syntax highlighting on
-if has("gui_running")
-    set guifont=Bitstream\ Vera\ Sans\ Mono\ 18
-    colorscheme wombat
-else
-    colorscheme desert
-endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files/Backups
@@ -177,24 +174,6 @@ set tags=./tags,../tags,./**/tags  " which tags files CTRL-] will search
 set makeef=makeerror.err
 "set path=./../**
 set path=./
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Latex
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
-" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
-" can be called correctly.
-set shellslash
-
-" IMPORTANT: grep will sometimes skip displaying the file name if you
-" search in a singe file. This will confuse Latex-Suite. Set your grep
-" program to always generate a file-name.
-set grepprg=grep\ -nH\ $*
-
-" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
-" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
-" The following changes the default filetype back to 'tex':
-let g:tex_flavor='latex'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
