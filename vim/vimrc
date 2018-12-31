@@ -33,7 +33,7 @@ Plugin 'marijnh/tern_for_vim'
 Plugin 'a.vim'
 Plugin 'matchit.zip'
 " Colorscheme
-Plugin 'kristijanhusak/vim-hybrid-material'
+Plugin 'jacoborus/tender.vim'
 call vundle#end()
 filetype plugin indent on " load filetype plugins
 
@@ -47,7 +47,7 @@ set completeopt=longest,menu " for omnipotent
 " Theme/Colors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set background=dark " we are using a dark background
-colorscheme hybrid_material
+colorscheme tender
 syntax on " syntax highlighting on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -183,8 +183,8 @@ set path=./
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <right> <ESC><C-PageDown>   " right arrow (normal mode) switches tabs
 map <left>  <ESC><C-PageUp>     " left arrow (normal mode) switches tabs
-map <C-E> :NERDTreeToggle
-map <C-T> :TagbarToggle
+map <C-E> :NERDTreeToggle<CR>
+map <C-T> :TagbarToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
@@ -246,6 +246,7 @@ let g:session_autoload = 'no' " vim-session
 let g:session_default_to_last = 1 " vim-session
 let g:session_command_aliases = 1 " vim-session
 let g:go_fmt_command = "goimports"  " vim-go
+let g:go_def_mapping_enabled=0 " vim-go
 let g:go_auto_sameids = 1
 let g:go_auto_type_info = 1
 set updatetime=200  " Used for sameids and type_info from go-vim
