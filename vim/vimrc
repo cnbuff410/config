@@ -183,8 +183,8 @@ set path=./
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <right> <ESC><C-PageDown>   " right arrow (normal mode) switches tabs
 map <left>  <ESC><C-PageUp>     " left arrow (normal mode) switches tabs
-map <C-E> :NERDTreeToggle<CR>
-map <C-T> :TagbarToggle<CR>
+map <C-E> :NERDTreeToggle
+map <C-T> :TagbarToggle
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
@@ -201,6 +201,11 @@ augroup filetype_go
     au BufWritePost,FileWritePost *.go execute 'GoBuild'
     au VimEnter *.go nested :call tagbar#autoopen(1)
     au Filetype go setlocal tw=200
+augroup END
+
+augroup quickfix
+    autocmd!
+    autocmd FileType go setlocal wrap
 augroup END
 
 " General
