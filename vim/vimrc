@@ -240,15 +240,11 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let b:match_ignorecase = 1  " Matchit
 let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict' " pydiction
+let g:syntastic_python_checkers = ['python3']
 let g:ycm_confirm_extra_conf = 0 " YouCompleteMe
-let g:session_autosave = 'no' " vim-session
-let g:session_autoload = 'no' " vim-session
-let g:session_default_to_last = 1 " vim-session
-let g:session_command_aliases = 1 " vim-session
 let g:go_fmt_command = "goimports"  " vim-go
 let g:go_def_mapping_enabled=0 " vim-go
 let g:go_auto_sameids = 1
 let g:go_auto_type_info = 1
 set updatetime=200  " Used for sameids and type_info from go-vim
 let g:tagbar_left=1 " tagbar
-let g:syntastic_python_checkers = ['python3']
