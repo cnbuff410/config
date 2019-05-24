@@ -198,7 +198,7 @@ au InsertLeave * :set rnu
 augroup filetype_go
     au!
     au BufRead,BufNewFile *.go :set filetype=go
-    au BufWritePost,FileWritePost *.go execute 'GoBuild'
+    au BufWritePost,FileWritePost *.go execute 'GoBuild!'
     au VimEnter *.go nested :call tagbar#autoopen(1)
     au Filetype go setlocal tw=200
 augroup END
